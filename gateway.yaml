@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
       - name: gateway-container
-        # image: anokhadocker/gateway:latest
+        image: anokhadocker/aspire-gateway:1
         # image: gateway:latest
-        image: ${REPOSITORY_TAG}
-        # imagePullPolicy: Never
+        # image: ${REPOSITORY_TAG}
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
 ---
