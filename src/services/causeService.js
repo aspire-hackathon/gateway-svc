@@ -3,9 +3,10 @@ const rp = require('request-promise');
 const causeService = {
 
     getCauses: (req, res, next) => {
+      console.log('inside causeService-------------------');
         const options = {
             method: 'GET',
-            uri: `http://cause-service.default.svc.cluster.local/cause/`,
+            uri: `http://user-service.default.svc.cluster.local/cause/`,
             json: true // Automatically stringifies the body to JSON
           };
           try {
@@ -25,7 +26,7 @@ const causeService = {
         try {
           const options = {
             method: 'POST', 
-            uri: 'http://cause-service.default.svc.cluster.local/cause/register',
+            uri: 'http://user-service.default.svc.cluster.local/cause/register',
             body: req.body,
             json: true // Automatically stringifies the body to JSON
         };
@@ -46,7 +47,7 @@ const causeService = {
         try {
           const options = {
             method: 'PATCH', 
-            uri: `http://cause-service.default.svc.cluster.local/cause/status/${req.params.id}`,
+            uri: `http://user-service.default.svc.cluster.local/cause/status/${req.params.id}`,
             body: req.body,
             json: true // Automatically stringifies the body to JSON
         };
@@ -67,7 +68,7 @@ const causeService = {
         try {
           const options = {
             method: 'PATCH', 
-            uri: `http://cause-service.default.svc.cluster.local/cause/${req.params.id}/${req.params.volid}`,
+            uri: `http://user-service.default.svc.cluster.local/cause/${req.params.id}/${req.params.volid}`,
             body: req.body,
             json: true // Automatically stringifies the body to JSON
         };
@@ -87,7 +88,7 @@ const causeService = {
     getCauseById: (req, res, next) => {
         const options = {
           method: 'GET',
-          uri: `http://cause-service.default.svc.cluster.local/cause/byid/${req.params.id}`,
+          uri: `http://user-service.default.svc.cluster.local/cause/byid/${req.params.id}`,
           json: true // Automatically stringifies the body to JSON
         };
         try {
@@ -106,7 +107,7 @@ const causeService = {
     getCauseByOwner: (req, res, next) => {
         const options = {
           method: 'GET',
-          uri: `http://cause-service.default.svc.cluster.local/cause/byowner/${req.params.id}`,
+          uri: `http://user-service.default.svc.cluster.local/cause/byowner/${req.params.id}`,
           json: true // Automatically stringifies the body to JSON
         };
         try {
