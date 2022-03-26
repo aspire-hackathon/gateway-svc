@@ -2,7 +2,7 @@ const express = require('express');
 
 const appRouter = express.Router();
 const userService = require('../services/userService');
-const questionService = require('../services/questionService');
+const causeService = require('../services/causeService');
 
 appRouter.route('/register')
   .post(userService.registerUser);
@@ -18,17 +18,23 @@ appRouter.route('/user/byid/:id')
 
 appRouter.route('/user/byusername/:username')
   .get(userService.getUserByUsername);
-  
-appRouter.route('/postQuestion')
-  .post(questionService.postQuestion);
-  
-  appRouter.route('/getAllQuestions')
-  .get(questionService.getAllQuestions);
-  
-appRouter.route('/addLike')
-    .post(questionService.addLike);
 
-appRouter.route('/addDislike')
-    .post(questionService.addDislike);
+appRouter.route('/causes')
+  .get(causeService.getCauses);
+
+appRouter.route('/cause/create')
+  .post(causeService.registerCause);
+
+appRouter.route('/cause/status/:id')
+  .patch(causeService.updateStatus);
+
+appRouter.route('/cause/:id/:volid')
+  .patch(causeService.addVolunteer);
+
+appRouter.route('/cause/byid/:id')
+  .get(causeService.getCauseById);
+
+appRouter.route('/cause/byowner/:id')
+  .get(causeService.getCauseByOwner);
 
 module.exports = appRouter;
