@@ -1,0 +1,581 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Swagger Documentation for Aspire Hackathon - Team Oranga",
+    "version": "1.0.0",
+    "title": "Tasks API"
+  },
+  "schemes": ["http"],
+  "host": "localhost:8080",
+  "basePath": "/api",
+  "tags":[
+    "causes",
+    "users"
+  ],
+  "paths": {
+    "/causes":{
+        "get": {
+          "tags":["causes"],
+            "summary": "Get all the causes",
+            "description": "Get all the tasks",
+            "produces": ["application/json"],
+            "parameters": [],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/causesResponse"
+                  }
+                }
+              },
+              "400": {
+                "description": "Invalid status value",
+                "schema": {
+                  "$ref": "#/definitions/InvalidResponse"
+                }
+              }
+            }
+          }
+    },
+    "/cause/register":{
+      "post": {
+        "tags":["causes"],
+        "summary": "Register a Cause",
+        "description": "Register the Cause",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "cause object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/cause"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/causesResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/cause/status/{id}": {
+      "patch": {
+        "tags":["causes"],
+        "summary": "Change Cause Status InProgress/Complete",
+        "description": "Change Cause Status InProgress/Complete",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "cause id that needs to updated status",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/causesResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/cause/{id}/{volid}": {
+      "patch": {
+        "tags":["causes"],
+        "summary": "Sign up volunteer with ID volid for the cause with id",
+        "description": "Register the volunteer for cause",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "cause id that needs to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "volid",
+            "in": "path",
+            "description": "volunteer id who is signing up for cause",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/causesResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/cause/byid/{id}":{
+      "get": {
+        "tags":["causes"],
+        "summary": "Get causes by id",
+        "description": "Get causes by id",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "cause id that needs to be retrived",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/causesResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/cause/byowner/{id}":{
+      "get": {
+        "tags":["causes"],
+        "summary": "Get causes by owner/user id",
+        "description": "Get causes by owner/user id",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "owner id to get all causes by that owner/user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/causesResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/register":{
+      "post": {
+        "tags":["users"],
+        "summary": "Register a User",
+        "description": "Register the User",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "user object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/userResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/login":{
+      "post": {
+        "tags":["users"],
+        "summary": "User Login",
+        "description": "User Login",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "user object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username":{
+                  "type":"string"
+                },
+                "password":{
+                  "type":"string"
+                }
+            }
+          }
+        }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/userResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/logout":{
+      "get": {
+        "tags":["users"],
+        "summary": "Logout user",
+        "description": "Logout user",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "properties":{
+              "message":"string"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/byid/{id}":{
+      "get": {
+        "tags":["users"],
+        "summary": "Get user by id",
+        "description": "Get user by id",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id that needs to be retrived",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/userResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/byusername/{username}":{
+      "get": {
+        "tags":["users"],
+        "summary": "Get user by username",
+        "description": "Get user by username",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "username that needs to be retrived",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/userResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "causesResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type":"string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aimDescription": {
+          "type": "string"
+        },
+        "causeImage": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "properties":{
+            "district": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "pincode": {
+              "type": "string"
+            },
+            "lat": {
+              "type": "string"
+            },
+            "lon": {
+              "type": "string"
+            }
+          }
+        },
+        "causeOwner": {
+          "type": "string"
+        },
+        "volunteers": {
+          "type": ["string"]
+        },
+        "causeStatus": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type":"string"
+        }
+      }
+    },
+    "cause": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "aimDescription": {
+          "type": "string"
+        },
+        "causeImage": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "properties":{
+            "district": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "pincode": {
+              "type": "string"
+            },
+            "lat": {
+              "type": "string"
+            },
+            "lon": {
+              "type": "string"
+            }
+          }
+        },
+        "causeOwner": {
+          "type": "string"
+        },
+        "volunteers": {
+          "type": ["string"]
+        },
+        "causeStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "userResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type":"string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "contactNo": {
+          "type": ["string"]
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "properties":{
+            "district": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "pincode": {
+              "type": "string"
+            },
+            "lat": {
+              "type": "string"
+            },
+            "lon": {
+              "type": "string"
+            }
+          }
+        },
+        "createdAt": {
+          "type":"string"
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "contactNo": {
+          "type": ["string"]
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "properties":{
+            "district": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "pincode": {
+              "type": "string"
+            },
+            "lat": {
+              "type": "string"
+            },
+            "lon": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "InvalidResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
