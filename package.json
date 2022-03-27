@@ -17,6 +17,8 @@
     "helmet": "^3.21.2",
     "nodemon": "^1.19.4",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request-promise": "^4.2.4",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.3.0"
   }
 }

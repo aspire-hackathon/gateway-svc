@@ -1,6 +1,8 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require('./swagger.json');
 const bodyParser = require('body-parser');
 const gatewayRouter = require('./src/routers/gatewayRouter');
 
@@ -16,6 +18,12 @@ app.use(cors({credentials: true, origin: true}));
 // app.options('*', cors());
 
 const port = 8080;
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument)
+);
 
 app.use('/api', gatewayRouter);
 
